@@ -8,24 +8,39 @@ import Col from 'react-bootstrap/Col';
 import Form from 'react-bootstrap/Form';
 import Button from 'react-bootstrap/Button';
 
+import {bolden, italicize, boldenAndItalicize, monospace, scriptize, subscript, superscript} from './fonts';
+
 export default function App () {
   return (
     <Container>
       <Row>
-        <h1>Unicode Text</h1>
+        <h1>Unicode.guys.wtf</h1>
       </Row>
       <TransformRow text="Strikethrough" transform={strike} />
+      <TransformRow text="Bold" transform={bolden} />
+      <TransformRow text="Italic" transform={italicize} />
+      <TransformRow text="Bold & Italic" transform={boldenAndItalicize} />
+      <TransformRow text="Monospace" transform={monospace} />
+      <TransformRow text="Scriptize" transform={scriptize} />
+      <Row>
+        <h2>Incomplete</h2>
+      </Row>
+      <TransformRow text="Subscript" transform={subscript} />
+      <TransformRow text="Superscript" transform={superscript} />
     </Container>
   );
 }
+
 
 class TransformRow extends React.Component {
   constructor(props) {
     super(props);
 
+    const {text, transform} = props;
+
     this.state = {
-      text: this.props.text,
-      transformed: this.props.transform(this.props.text),
+      text: text,
+      transformed: transform(text),
       copied: false,
     }
   }
@@ -50,13 +65,19 @@ class TransformRow extends React.Component {
             &nbsp;
           </Col>
           <Col xs={12} md={5}>
-            <Form.Control disabled readonly type='text' value={transformed} />
+            <Form.Control disabled readOnly type='text' value={transformed} style={{
+              fontFamily: 'monospace',
+            }} />
             &nbsp;
           </Col>
           <Col xs={12} md={2}>
             <CopyToClipboard text={transformed} onCopy={this.onCopy}>
                 <Button>{copied ? "Copied!" : "Copy to clipboard"}</Button>
             </CopyToClipboard>
+            &nbsp;
+          </Col>
+          <Col className="d-block d-md-none">
+            <hr />
           </Col>
         </Row>
       </Form>

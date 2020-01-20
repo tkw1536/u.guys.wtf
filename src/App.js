@@ -14,7 +14,7 @@ export default function App () {
   return (
     <Container>
       <Row>
-        <h1>Unicode.guys.wtf</h1>
+        <h1>u.guys.wtf</h1>
       </Row>
       <TransformRow text="Strikethrough" transform={strike} />
       <TransformRow text="Bold" transform={bolden} />

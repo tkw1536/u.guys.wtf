@@ -1,4 +1,4 @@
-import React from 'react';
+import * as React from 'react';
 
 import {CopyToClipboard} from 'react-copy-to-clipboard';
 
@@ -8,7 +8,7 @@ import Col from 'react-bootstrap/Col';
 import Form from 'react-bootstrap/Form';
 import Button from 'react-bootstrap/Button';
 
-import {bolden, italicize, boldenAndItalicize, monospace, scriptize, subscript, superscript} from './fonts';
+import {bolden, italicize, boldenAndItalicize, monospace, scriptize, subscript, superscript} from '../lib/fonts';
 
 export default function App () {
   return (
@@ -31,9 +31,20 @@ export default function App () {
   );
 }
 
+interface TransformRowProps {
+  text: string,
+  transform: (text: string) => string,
+}
 
-class TransformRow extends React.Component {
-  constructor(props) {
+interface TransformRowState {
+  text: string,
+  transformed: string,
+  copied: boolean,
+}
+
+
+class TransformRow extends React.Component<TransformRowProps, TransformRowState> {
+  constructor(props: TransformRowProps) {
     super(props);
 
     const {text, transform} = props;
@@ -42,10 +53,10 @@ class TransformRow extends React.Component {
       text: text,
       transformed: transform(text),
       copied: false,
-    }
+    };
   }
 
-  onChange = (event) => this.setState({
+  onChange = (event: React.ChangeEvent<HTMLInputElement>) => this.setState({
     text: event.target.value,
     transformed: this.props.transform(event.target.value),
     copied: false,

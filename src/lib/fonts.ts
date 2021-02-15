@@ -9,20 +9,33 @@
  */
 
 class CharTransform {
-	constructor(startLetter, endLetter, startReplacement) {
+	private startCode: number;
+	private endCode: number;
+	private replacementCodes: number[];
+
+	constructor(startLetter: string, endLetter: string, startReplacement: string) {
 		this.startCode = startLetter.charCodeAt(0);
 		this.endCode = endLetter.charCodeAt(0);
 		this.replacementCodes = startReplacement.split('').map(c => c.charCodeAt(0));
 	}
 
-	matches(charCode) {
+	/** checks if this transform matches a particular charcode */
+	public matches(charCode: number): boolean {
 		return charCode >= this.startCode && charCode <= this.endCode;
 	}
 
-	transform(charCode, buffer) {
+	public transform(charCode: number, buffer: number[]) {
 		buffer.push(...this.replacementCodes);
 		buffer[buffer.length-1] += charCode - this.startCode;
 	}
+
+	static boldenTransforms: CharTransform[];
+	static italicizeTransform: CharTransform[];
+	static boldenAndItalicizeTransform: CharTransform[];
+	static monospaceTransform: CharTransform[];
+	static scriptizeTransform: CharTransform[]; 
+	static subscriptTransform: CharTransform[];
+	static superscriptTransform: CharTransform[];
 }
 
 class SmallLetterTransform extends CharTransform {
@@ -106,8 +119,9 @@ CharTransform.superscriptTransform = [
 	new SingleCharTransform('i', 'ⁱ'),
 ];
 
-function transformator(transforms) {
-	return function transform(text) {
+/** makes a transform function from a list of transformers */
+function transformator(transforms: CharTransform[]): (text: string) => string {
+	return function transform(text: string): string {
 		let codesBuffer = [];
 		for(let i=0; i<text.length; i++) {
 			let code = text.charCodeAt(i);

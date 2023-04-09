@@ -36,6 +36,7 @@ class CharTransform {
 	static scriptizeTransform: CharTransform[]; 
 	static subscriptTransform: CharTransform[];
 	static superscriptTransform: CharTransform[];
+	static upsidedownTransform: CharTransform[];
 }
 
 class SmallLetterTransform extends CharTransform {
@@ -119,6 +120,88 @@ CharTransform.superscriptTransform = [
 	new SingleCharTransform('i', 'ⁱ'),
 ];
 
+CharTransform.upsidedownTransform = [
+	new SingleCharTransform("a","ɐ"),
+new SingleCharTransform("b","q"),
+new SingleCharTransform("c","ɔ"),
+new SingleCharTransform("d","p"),
+new SingleCharTransform("e","ǝ"),
+new SingleCharTransform("f","ɟ"),
+new SingleCharTransform("g","ƃ"),
+new SingleCharTransform("h","ɥ"),
+new SingleCharTransform("i","ᴉ"),
+new SingleCharTransform("j","ɾ"),
+new SingleCharTransform("k","ʞ"),
+new SingleCharTransform("l","l"),
+new SingleCharTransform("m","ɯ"),
+new SingleCharTransform("n","u"),
+new SingleCharTransform("o","o"),
+new SingleCharTransform("p","d"),
+new SingleCharTransform("q","b"),
+new SingleCharTransform("r","ɹ"),
+new SingleCharTransform("s","s"),
+new SingleCharTransform("t","ʇ"),
+new SingleCharTransform("u","n"),
+new SingleCharTransform("v","ʌ"),
+new SingleCharTransform("w","ʍ"),
+new SingleCharTransform("x","x"),
+new SingleCharTransform("y","ʎ"),
+new SingleCharTransform("z","z"),
+new SingleCharTransform("A","∀"),
+new SingleCharTransform("B","B"),
+new SingleCharTransform("C","Ɔ"),
+new SingleCharTransform("D","D"),
+new SingleCharTransform("E","Ǝ"),
+new SingleCharTransform("F","Ⅎ"),
+new SingleCharTransform("G","פ"),
+new SingleCharTransform("H","H"),
+new SingleCharTransform("I","I"),
+new SingleCharTransform("J","ſ"),
+new SingleCharTransform("K","K"),
+new SingleCharTransform("L","˥"),
+new SingleCharTransform("M","W"),
+new SingleCharTransform("N","N"),
+new SingleCharTransform("O","O"),
+new SingleCharTransform("P","Ԁ"),
+new SingleCharTransform("Q","Q"),
+new SingleCharTransform("R","R"),
+new SingleCharTransform("S","S"),
+new SingleCharTransform("T","┴"),
+new SingleCharTransform("U","∩"),
+new SingleCharTransform("V","Λ"),
+new SingleCharTransform("W","M"),
+new SingleCharTransform("X","X"),
+new SingleCharTransform("Y","⅄"),
+new SingleCharTransform("Z","Z"),
+new SingleCharTransform("0","0"),
+new SingleCharTransform("1","Ɩ"),
+new SingleCharTransform("2","ᄅ"),
+new SingleCharTransform("3","Ɛ"),
+new SingleCharTransform("4","ㄣ"),
+new SingleCharTransform("5","ϛ"),
+new SingleCharTransform("6","9"),
+new SingleCharTransform("7","ㄥ"),
+new SingleCharTransform("8","8"),
+new SingleCharTransform("9","6"),
+new SingleCharTransform(",","'"),
+new SingleCharTransform(".","˙"),
+new SingleCharTransform("?","¿"),
+new SingleCharTransform("!","¡"),
+new SingleCharTransform("\"",",,"),
+new SingleCharTransform("'",","),
+new SingleCharTransform("`",","),
+new SingleCharTransform("(",")"),
+new SingleCharTransform(")","("),
+new SingleCharTransform("[","]"),
+new SingleCharTransform("]","["),
+new SingleCharTransform("{","}"),
+new SingleCharTransform("}","{"),
+new SingleCharTransform("<",">"),
+new SingleCharTransform(">","<"),
+new SingleCharTransform("&","⅋"),
+new SingleCharTransform("_","‾"),
+]
+
 /** makes a transform function from a list of transformers */
 function transformator(transforms: CharTransform[]): (text: string) => string {
 	return function transform(text: string): string {
@@ -140,3 +223,9 @@ export const monospace = transformator(CharTransform.monospaceTransform);
 export const scriptize = transformator(CharTransform.scriptizeTransform);
 export const subscript = transformator(CharTransform.subscriptTransform);
 export const superscript = transformator(CharTransform.superscriptTransform);
+export const upsidedown = (() => {
+	const t = transformator(CharTransform.upsidedownTransform)
+	return (x: string) => {
+		return t(x.split("").reverse().join(""))
+	}
+})()

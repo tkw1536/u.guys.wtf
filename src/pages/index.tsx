@@ -8,7 +8,7 @@ import Col from 'react-bootstrap/Col';
 import Form from 'react-bootstrap/Form';
 import Button from 'react-bootstrap/Button';
 
-import {bolden, italicize, boldenAndItalicize, monospace, scriptize, subscript, superscript} from '../lib/fonts';
+import {bolden, italicize, boldenAndItalicize, monospace, scriptize, subscript, superscript, upsidedown} from '../lib/fonts';
 
 export default function App () {
   return (
@@ -17,11 +17,13 @@ export default function App () {
         <h1>u.guys.wtf</h1>
       </Row>
       <TransformRow text="Strikethrough" transform={strike} />
+      <TransformRow text="Upside Down" transform={upsidedown} />
       <TransformRow text="Bold" transform={bolden} />
       <TransformRow text="Italic" transform={italicize} />
       <TransformRow text="Bold & Italic" transform={boldenAndItalicize} />
       <TransformRow text="Monospace" transform={monospace} />
       <TransformRow text="Scriptize" transform={scriptize} />
+
       <Row>
         <h2>Incomplete</h2>
       </Row>

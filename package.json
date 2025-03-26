@@ -4,7 +4,7 @@
   "private": true,
   "scripts": {
     "dev": "next dev",
-    "build": "next build && next export",
+    "build": "next build",
     "start": "next start",
     "deploy": "yarn build && gh-pages --dist out --no-history --dotfiles"
   },
@@ -12,16 +12,16 @@
     "@types/react-bootstrap": "^0.32.26",
     "@types/react-copy-to-clipboard": "^5.0.1",
     "bootstrap": "^5.1.0",
-    "next": "12.1.0",
-    "react": "17.0.2",
-    "react-bootstrap": "^1.6.1",
+    "next": "15.2.4",
+    "react": "19.0.0",
+    "react-bootstrap": "^2.10.9",
     "react-copy-to-clipboard": "^5.0.3",
-    "react-dom": "17.0.2"
+    "react-dom": "19.0.0"
   },
   "devDependencies": {
-    "@types/node": "^16.6.1",
-    "@types/react": "^17.0.17",
-    "gh-pages": "^3.2.3",
-    "typescript": "^4.3.5"
+    "@types/node": "^22.13.13",
+    "@types/react": "^19.0.12",
+    "gh-pages": "^6.3.0",
+    "typescript": "^5.8.2"
   }
 }
